@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import compression from "compression";
 import bodyParser from "body-parser";
-import { connectDB } from "./db";
+import { AppDataSource } from "./db";
 import routes from './routes'
 import dotenv from 'dotenv'
 import cors from 'cors'
@@ -11,7 +11,10 @@ import { exceptionHandler } from "./exceptions/HttpException";
 dotenv.config() //Init .env constants
 
 const app:Express = express();
-connectDB()
+
+AppDataSource.initialize() // Init DB connection
+.then(() => console.log("Data Source has been initialized!"))
+.catch((err:any) => console.error("Error during Data Source initialization:", err))
 
 app.use(bodyParser.json()) // Parse every request with JSON
 app.use(compression()) // Compress every HTTP request
