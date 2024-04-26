@@ -9,6 +9,7 @@ export const environment = {
   urls: {
     app:env.APP_URL 
   },
+  port: env.APP_PORT,
   database: {
     db: env.POSTGRES_DB,
     username: env.POSTGRES_USERNAME,
@@ -22,6 +23,7 @@ export const schema = Joi.object({
   urls: {
     app: Joi.string().required()
   },
+  port: Joi.string().required(),
   database: {
     db: Joi.string().required(),
     username: Joi.string().required(),
