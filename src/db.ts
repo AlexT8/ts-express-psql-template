@@ -1,7 +1,7 @@
 import { DataSource, DataSourceOptions } from "typeorm"
 import { environment } from "./config";
 
-export const conObject:DataSourceOptions = {
+export const connection: DataSourceOptions = {
     type: "postgres",
     host: environment.database.host,
     port: Number(environment.database.port),
@@ -12,4 +12,4 @@ export const conObject:DataSourceOptions = {
     entities:[/*Base, Transaction, User, BankAccount, ResetPassword, Account*/],
 }
 
-export const AppDataSource = new DataSource(conObject)
+export const AppDataSource = new DataSource(connection)
