@@ -3,14 +3,11 @@ import compression from "compression";
 import bodyParser from "body-parser";
 import { AppDataSource } from "./db";
 import routes from './routes'
-import dotenv from 'dotenv'
 import cors from 'cors'
 
 import { exceptionHandler } from "./exceptions/HttpException";
-import { validateEnvironment } from "./config";
+import { environment, validateEnvironment } from "./config";
 import { DataBaseLog, ServerLog } from "./utils/Logs";
-
-dotenv.config() //Init .env constants
 
 const app:Express = express();
 
@@ -25,7 +22,7 @@ app.use(compression()) // Compress every HTTP request
 
 const corsOptions = {
     credentials: true,
-    origin: process.env.APP_URL
+    origin: environment.urls.app
 }
 
 app.use(cors(corsOptions))
@@ -34,6 +31,6 @@ app.use(exceptionHandler) // Manage exceptions
 app.get('/', (_req, res) => res.send('API running!'))
 app.use('/api', routes)
 
-const PORT:number = Number(process.env.PORT) || 5000
+const PORT:number = Number(environment.port) || 5000
 
 app.listen(PORT, () => ServerLog(`listening on port:${PORT} at:${new Date()}`))
