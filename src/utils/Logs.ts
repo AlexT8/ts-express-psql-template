@@ -1,2 +1,2 @@
-export const ServerLog = (text: string) => console.log(`[SERVER]: ${text}`)
-export const DataBaseLog = (text: string) => console.log(`[DATABASE]: ${text}`)
+export const ServerLog = (text: string, details?: any) => console.log(`[SERVER]: ${text}`, details ? details : '')
+export const DataBaseLog = (text: string, details?: any) => console.log(`[DATABASE]: ${text}`, details ? details : '')
