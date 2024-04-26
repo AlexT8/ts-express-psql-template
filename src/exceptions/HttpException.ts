@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ValidationError } from "express-validator";
+import { ServerLog } from "../utils/Logs";
 
 export class HttpException extends Error {
     statusCode: number;
@@ -17,6 +18,6 @@ export const exceptionHandler = (error: HttpException, _req: Request, res: Respo
     const status = error.statusCode || 500;
     const message = status === 500 ? "Ha ocurrido un error en el servidor." : error.message;
     const data = error.data || [];
-    console.error(error);
+    ServerLog(error.message, error.data);
     res.status(status).json({ message: message, errors: data });
 }
