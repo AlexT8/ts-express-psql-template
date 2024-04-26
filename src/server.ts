@@ -8,6 +8,7 @@ import cors from 'cors'
 
 import { exceptionHandler } from "./exceptions/HttpException";
 import { validateEnvironment } from "./config";
+import { DataBaseLog, ServerLog } from "./utils/Logs";
 
 dotenv.config() //Init .env constants
 
@@ -16,8 +17,8 @@ const app:Express = express();
 validateEnvironment()
 
 AppDataSource.initialize() // Init DB connection
-.then(() => console.log("Data Source has been initialized!"))
-.catch((err:any) => console.error("Error during Data Source initialization:", err))
+.then(() => DataBaseLog("Data Source has been initialized!"))
+.catch((err:any) => DataBaseLog("Error during Data Source initialization:", err))
 
 app.use(bodyParser.json()) // Parse every request with JSON
 app.use(compression()) // Compress every HTTP request
@@ -35,4 +36,4 @@ app.use('/api', routes)
 
 const PORT:number = Number(process.env.PORT) || 5000
 
-app.listen(PORT, () => console.log(`listening on port:${PORT} at:${new Date()}`))
+app.listen(PORT, () => ServerLog(`listening on port:${PORT} at:${new Date()}`))
