@@ -7,10 +7,13 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 import { exceptionHandler } from "./exceptions/HttpException";
+import { validateEnvironment } from "./config";
 
 dotenv.config() //Init .env constants
 
 const app:Express = express();
+
+validateEnvironment()
 
 AppDataSource.initialize() // Init DB connection
 .then(() => console.log("Data Source has been initialized!"))
