@@ -1,10 +1,6 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 const router = Router()
 
-/*
-Here you can add your routes
-Ex:
-router.get('/auth', auth)
-*/
+router.get('/liveness', (_req: Request, res: Response) => res.json({message: 'On Live!'}))
 
 export default router
