@@ -5,7 +5,7 @@ dotenv.config()
 
 const { env } = process
 
-export const config = {
+export const environment = {
   urls: {
     app:env.APP_URL 
   },
@@ -34,7 +34,7 @@ export const schema = Joi.object({
 
 export const validateEnvironment = async () => {
   try {
-    await schema.validateAsync(config)
+    await schema.validateAsync(environment)
   } catch (error: any) {
     if(error?.details?.length > 0) throw new HttpException(400, 'Invalid .env variables', error)
   }
